@@ -1,0 +1,38 @@
+[
+    {
+        "name": "wall-1",
+        "href": "img/wallpaper-1.jpg"
+    },
+    {
+        "name": "wall-2",
+        "href": "img/wallpaper-2.jpg"
+    },
+    {
+        "name": "wall-3",
+        "href": "img/wallpaper-3.jpg"
+    },
+    {
+        "name": "wall-4",
+        "href": "img/wallpaper-4.jpg"
+    },
+    {
+        "name": "wall-5",
+        "href": "img/wallpaper-5.jpg"
+    },
+    {
+        "name": "wall-6",
+        "href": "img/wallpaper-6.png"
+    },
+    {
+        "name": "wall-7",
+        "href": "img/wallpaper-7.png"
+    },
+    {
+        "name": "wall-8",
+        "href": "img/wallpaper-8.png"
+    },
+    {
+        "name": "wall-9",
+        "href": "img/wallpaper-9.jpg"
+    }
+]

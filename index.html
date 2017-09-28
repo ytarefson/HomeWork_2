@@ -1,0 +1,97 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div id="wrapper">
+    <div class="buttons">
+      <button id="button" onclick="loadGallery()">Загрузить gallery.json!</button>
+      <button id="buttonMenu" onclick="loadMenu()">Загрузить menu.json!</button>
+    </div>
+  </div>
+ 
+  <script>
+    function loadGallery() {
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET','gallery.json', true);
+      xhr.onreadystagechange = function() { // 3
+        if (xhr.readyState != 4) return; 
+        button.innerHTML = 'Готово!';
+        if (xhr.status != 200) {
+          // обработать ошибку
+          alert('Ошибка ' + xhr.status + ': ' + xhr.statusText);
+        } else {
+          // вывести результат
+          alert(xhr.responseText);
+        }
+      }
+      xhr.send();
+      button.innerHTML = 'Загружаю...'; // 2
+      button.disabled = true;
+      var wrapper = document.getElementById("wrapper");
+      function renderHTML(Data) {
+        var htmlCode = '<div class="gallery__container">';
+        for (var i=0; i < Data.length; i++) {
+          htmlCode += '<div class="pic"><a href="' + Data[i].href + '">';
+          htmlCode += '<img width="100px" src="' + Data[i].href + '" ></a>';
+          htmlCode += '<p>' + Data[i].name + "</p></div>";
+        }
+        htmlCode += '</div>';
+      wrapper.insertAdjacentHTML('beforeend', htmlCode);
+      }
+      xhr.onload = function() {
+        var ourData = JSON.parse(xhr.responseText);
+        renderHTML(ourData);
+      }
+    }
+
+    function loadMenu() {
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET','menu.json', true);
+      xhr.onreadystagechange = function() { // 3
+        if (xhr.readyState != 4) return; 
+        button.innerHTML = 'Готово!';
+        if (xhr.status != 200) {
+          // обработать ошибку
+          alert('Ошибка ' + xhr.status + ': ' + xhr.statusText);
+        } else {
+          // вывести результат
+          alert(xhr.responseText);
+        }
+      }
+      xhr.send();
+      buttonMenu.innerHTML = 'Загружаю...'; // 2
+      buttonMenu.disabled = true;
+      var wrapper = document.getElementById("wrapper");
+      function renderHTML(Data) {
+        var htmlCode = "";
+        htmlCode += '<div class="MenuContainer"><ul class="Menu">';
+        for (var i=0; i<Data.length;i++) {
+          console.log(Data.length);
+          htmlCode += '<li><a href="'+Data[i].href+'">' + Data[i].name + '</a>';
+          if (Data[i].submenu.subname.length>0) {
+            console.log(Data[i].submenu.subname.length);
+            htmlCode += '<ul class="subMenu">';
+            for (var ii=0; ii<Data[i].submenu.subname.length;ii++) {
+              htmlCode += '<li><a href="'+Data[i].href+'">' + Data[i].submenu.subname[ii] + '</a></li>';
+            }
+          }
+          htmlCode += '</ul></li>';
+        }
+        htmlCode += '</ul></div>';
+      wrapper.insertAdjacentHTML('afterbegin', htmlCode);
+      }
+      xhr.onload = function() {
+        var ourData = JSON.parse(xhr.responseText);
+        renderHTML(ourData);
+      }
+    }
+  </script>
+
+</body>
+
+</html>
